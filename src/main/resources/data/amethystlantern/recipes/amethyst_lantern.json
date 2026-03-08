@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "ALA",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "L": {
+      "item": "minecraft:soul_lantern"
+    }
+  },
+  "result": {
+    "item": "amethystlantern:amethyst_lantern",
+    "count": 1
+  }
+}

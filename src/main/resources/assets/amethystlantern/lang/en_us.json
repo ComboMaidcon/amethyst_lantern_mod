@@ -1,0 +1,15 @@
+{
+  "itemGroup.amethystlantern": "Amethyst Lantern",
+
+  "item.amethystlantern.amethyst_lantern": "Amethyst Lantern",
+  "item.amethystlantern.amethyst_lantern.tooltip.effect": "Miễn dịch hoàn toàn với thay đổi thân nhiệt",
+  "item.amethystlantern.amethyst_lantern.tooltip.slot": "Equip: Belt slot",
+
+  "item.amethystlantern.bizarre_brain": "Bizarre Brain",
+  "item.amethystlantern.bizarre_brain.tooltip.effect": "Quái vật ngoài 8 blocks không nhắm vào bạn",
+  "item.amethystlantern.bizarre_brain.tooltip.warning": "Quái trong 8 blocks vẫn nguy hiểm!",
+  "item.amethystlantern.bizarre_brain.tooltip.slot": "Equip: Head slot",
+
+  "curios.identifier.belt": "Belt",
+  "curios.identifier.head": "Head"
+}

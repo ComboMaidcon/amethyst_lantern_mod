@@ -1,0 +1,50 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+    modId="amethystlantern"
+    version="1.0.0"
+    displayName="Amethyst Lantern"
+    description='''
+Adds two mystical Curios items:
+- Amethyst Lantern (Belt): Fully immunizes player from temperature changes (Tough As Nails)
+- Bizarre Brain (Head): Suppresses mob aggro beyond 8 blocks radius
+    '''
+    authors="YourName"
+
+[[dependencies.amethystlantern]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47.2,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.amethystlantern]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.amethystlantern]]
+    modId="curios"
+    mandatory=true
+    versionRange="[5.3,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.amethystlantern]]
+    modId="toughasnails"
+    mandatory=true
+    versionRange="[4.2,)"
+    ordering="AFTER"
+    side="BOTH"
+
+# Enigmatic Legacy - cần cho Etherium Ingot trong công thức Bizarre Brain
+[[dependencies.amethystlantern]]
+    modId="enigmaticlegacy"
+    mandatory=true
+    versionRange="[2.30,)"
+    ordering="AFTER"
+    side="BOTH"

@@ -1,0 +1,79 @@
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+version = '1.0.0'
+group = 'com.example.amethystlantern'
+archivesBaseName = 'amethystlantern-1.20.1'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                amethystlantern { source sourceSets.main }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                amethystlantern { source sourceSets.main }
+            }
+        }
+    }
+}
+
+repositories {
+    // Curios API - có Maven chính thức
+    maven {
+        name = "Curios Maven"
+        url = "https://maven.theillusivec4.top/"
+    }
+    // CurseMaven - dùng cho TAN và Enigmatic Legacy
+    maven {
+        name = "CurseMaven"
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.20'
+
+    // Curios API 5.3.5+1.20.1 (từ maven.theillusivec4.top)
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.3.5+1.20.1:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.3.5+1.20.1")
+
+    // Tough As Nails 1.20.1-9.0.0.96 (CurseMaven: project=246391 file=4750298)
+    implementation fg.deobf("curse.maven:tough-as-nails-246391:4750298")
+
+    // Enigmatic Legacy 2.30.1 for 1.20.1 (CurseMaven: project=336184 file=5600004)
+    implementation fg.deobf("curse.maven:enigmatic-legacy-336184:5600004")
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title"   : "amethystlantern",
+            "Specification-Vendor"  : "YourName",
+            "Specification-Version" : "1",
+            "Implementation-Title"  : project.name,
+            "Implementation-Version": project.jar.archiveVersion,
+            "Implementation-Vendor" : "YourName",
+        ])
+    }
+}
