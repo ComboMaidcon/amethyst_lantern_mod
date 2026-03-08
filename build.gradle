@@ -55,8 +55,8 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.2.20'
 
     // Curios API 5.3.5+1.20.1 (từ maven.theillusivec4.top)
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.3.5+1.20.1:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.3.5+1.20.1")
+    compileOnly fg.deobf("curse.maven:curios-309927:6418456")
+    runtimeOnly fg.deobf("curse.maven:curios-309927:6418456")
 
     // Tough As Nails 1.20.1-9.0.0.96 (CurseMaven: project=246391 file=4750298)
     implementation fg.deobf("curse.maven:tough-as-nails-246391:4750298")

@@ -2,6 +2,7 @@ package com.example.amethystlantern.item;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
@@ -16,20 +17,6 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-/**
- * BizarreBrainItem - Bộ Não Kỳ Quái
- *
- * Khi đeo trên đầu (Curios "head" slot):
- * - Quái vật trong bán kính > 8 blocks hoàn toàn không nhắm vào player
- * - Quái đang đuổi sẽ bị force-drop target nếu cách xa hơn 8 blocks
- * - Quái trong phạm vi 8 blocks vẫn hoạt động bình thường
- *
- * Cơ chế kép:
- * 1. RESET TARGET  — mỗi 10 tick quét tất cả Mob xung quanh,
- *    nếu target là player này VÀ khoảng cách > 8 → setTarget(null)
- * 2. BLOCK PATHFINDING — xóa goal NearestAttackableTargetGoal
- *    khỏi mob ở xa để chúng không thể re-target
- */
 public class BizarreBrainItem extends Item implements ICurioItem {
 
     public static final double SAFE_RADIUS = 8.0;
@@ -77,12 +64,10 @@ public class BizarreBrainItem extends Item implements ICurioItem {
         for (Mob mob : nearbyMobs) {
             if (mob.distanceToSqr(player) <= safeRadiusSq) continue;
 
-            // Cơ chế 1: Reset target
             if (mob.getTarget() instanceof Player t && t.getUUID().equals(player.getUUID())) {
                 mob.setTarget(null);
             }
 
-            // Cơ chế 2: Block pathfinding - xóa goal nhắm vào Player
             mob.targetSelector.getAvailableGoals().removeIf(wrapped -> {
                 if (!(wrapped.getGoal() instanceof NearestAttackableTargetGoal<?> goal)) return false;
                 try {
@@ -100,11 +85,50 @@ public class BizarreBrainItem extends Item implements ICurioItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level,
                                 List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.literal("Quái vật ngoài " + (int) SAFE_RADIUS + " blocks không nhắm vào bạn")
+        // Dòng kẻ trên
+        tooltip.add(Component.literal("─────────────────────")
             .withStyle(ChatFormatting.DARK_PURPLE));
-        tooltip.add(Component.literal("Quái trong phạm vi " + (int) SAFE_RADIUS + " blocks vẫn nguy hiểm!")
-            .withStyle(ChatFormatting.RED));
-        tooltip.add(Component.literal("Trang bị: Head slot (Curios)")
+
+        // Slot info
+        MutableComponent slotLine = Component.literal("  ⬡ ")
+            .withStyle(ChatFormatting.GOLD)
+            .append(Component.literal("Curios Head Slot")
+                .withStyle(ChatFormatting.YELLOW));
+        tooltip.add(slotLine);
+
+        // Rarity flavor
+        tooltip.add(Component.literal("  ✧ Cổ vật kỳ dị — nguồn gốc bất minh")
+            .withStyle(ChatFormatting.DARK_PURPLE));
+
+        // Dòng kẻ giữa
+        tooltip.add(Component.literal("─────────────────────")
+            .withStyle(ChatFormatting.DARK_PURPLE));
+
+        // Effect chính
+        tooltip.add(Component.literal("  ☠ ")
+            .withStyle(ChatFormatting.DARK_RED)
+            .append(Component.literal("Bóp méo nhận thức")
+                .withStyle(ChatFormatting.WHITE)));
+        tooltip.add(Component.literal("    Quái vật ngoài ")
+            .withStyle(ChatFormatting.GRAY)
+            .append(Component.literal((int) SAFE_RADIUS + " blocks")
+                .withStyle(ChatFormatting.LIGHT_PURPLE))
+            .append(Component.literal(" không thể")
+                .withStyle(ChatFormatting.GRAY)));
+        tooltip.add(Component.literal("    nhắm mục tiêu vào bạn.")
             .withStyle(ChatFormatting.GRAY));
+
+        // Cảnh báo
+        tooltip.add(Component.empty());
+        tooltip.add(Component.literal("  ⚠ Cảnh báo: ")
+            .withStyle(ChatFormatting.RED)
+            .append(Component.literal("Quái trong " + (int) SAFE_RADIUS + " blocks")
+                .withStyle(ChatFormatting.YELLOW)));
+        tooltip.add(Component.literal("    vẫn tấn công bình thường!")
+            .withStyle(ChatFormatting.GRAY));
+
+        // Dòng kẻ dưới
+        tooltip.add(Component.literal("─────────────────────")
+            .withStyle(ChatFormatting.DARK_PURPLE));
     }
 }
