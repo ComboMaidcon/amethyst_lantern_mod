@@ -1,5 +1,6 @@
 package com.example.amethystlantern;
 
+import com.example.amethystlantern.item.ToughAsNailsHelper;
 import com.example.amethystlantern.registry.ModCreativeTabs;
 import com.example.amethystlantern.registry.ModItems;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,13 +19,10 @@ public class AmethystLanternMod {
     public AmethystLanternMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Register items
         ModItems.ITEMS.register(modEventBus);
-
-        // Register creative tab
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
 
-        // Register ourselves for server and other game events
-        MinecraftForge.EVENT_BUS.register(this);
+        // Đăng ký ToughAsNailsHelper để nhận PlayerTickEvent
+        MinecraftForge.EVENT_BUS.register(ToughAsNailsHelper.class);
     }
 }

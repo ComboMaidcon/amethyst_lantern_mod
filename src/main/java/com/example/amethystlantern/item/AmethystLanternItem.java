@@ -1,6 +1,5 @@
 package com.example.amethystlantern.item;
 
-import com.example.amethystlantern.AmethystLanternMod;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -21,13 +20,8 @@ public class AmethystLanternItem extends Item implements ICurioItem {
         super(properties);
     }
 
-    @Override
-    public void curioTick(SlotContext slotContext, ItemStack stack) {
-        var player = slotContext.entity();
-        if (player.level().isClientSide()) return;
-        if (!ModList.get().isLoaded("toughasnails")) return;
-        ToughAsNailsHelper.lockTemperature(player);
-    }
+    // curioTick không cần nữa — TAN được xử lý qua PlayerTickEvent Phase.END
+    // để đảm bảo chạy SAU khi TAN tính xong nhiệt độ
 
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
@@ -54,32 +48,27 @@ public class AmethystLanternItem extends Item implements ICurioItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level,
                                 List<Component> tooltip, TooltipFlag flag) {
-        // Dòng kẻ trên — style Enigmatic Legacy
         tooltip.add(Component.literal("─────────────────────")
             .withStyle(ChatFormatting.DARK_PURPLE));
 
-        // Slot info
         MutableComponent slotLine = Component.literal("  ⬡ ")
             .withStyle(ChatFormatting.GOLD)
             .append(Component.literal("Curios Belt Slot")
                 .withStyle(ChatFormatting.YELLOW));
         tooltip.add(slotLine);
 
-        // Dòng kẻ giữa
         tooltip.add(Component.literal("─────────────────────")
             .withStyle(ChatFormatting.DARK_PURPLE));
 
-        // Effect chính
         tooltip.add(Component.literal("  ❄ ")
             .withStyle(ChatFormatting.AQUA)
             .append(Component.literal("Điều hòa thân nhiệt")
                 .withStyle(ChatFormatting.WHITE)));
         tooltip.add(Component.literal("    Khóa nhiệt độ về vùng an toàn")
             .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.literal("    mỗi tick khi đang đeo.")
+        tooltip.add(Component.literal("    dù ở Nether hay The End.")
             .withStyle(ChatFormatting.GRAY));
 
-        // TAN status
         tooltip.add(Component.empty());
         if (ModList.get().isLoaded("toughasnails")) {
             tooltip.add(Component.literal("  ✔ Tough As Nails: ")
@@ -93,7 +82,6 @@ public class AmethystLanternItem extends Item implements ICurioItem {
                     .withStyle(ChatFormatting.GRAY)));
         }
 
-        // Dòng kẻ dưới
         tooltip.add(Component.literal("─────────────────────")
             .withStyle(ChatFormatting.DARK_PURPLE));
     }
