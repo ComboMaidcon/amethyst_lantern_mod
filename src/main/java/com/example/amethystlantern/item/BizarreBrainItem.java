@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BizarreBrainItem extends Item implements ICurioItem {
 
-    public static final double SAFE_RADIUS = 8.0;
+    public static final double SAFE_RADIUS = 4.0;
     private static final int TICK_INTERVAL = 10;
     private static final double SCAN_RADIUS = SAFE_RADIUS * 3;
 
