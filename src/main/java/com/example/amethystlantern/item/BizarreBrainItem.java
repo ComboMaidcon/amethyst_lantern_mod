@@ -11,13 +11,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.CurioSlot;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-@CurioSlot(identifier = "head")
 /**
  * BizarreBrainItem - Bộ Não Kỳ Quái
  *
