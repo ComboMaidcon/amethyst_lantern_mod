@@ -28,7 +28,7 @@ public class AmethystLanternItem extends Item implements ICurioItem {
         var player = slotContext.entity();
         if (!player.level().isClientSide()) {
             player.sendSystemMessage(
-                Component.literal("Your soul is now protected")
+                Component.literal("✦ Đèn Lồng Thạch Anh tỏa ra hơi ấm huyền bí...")
                     .withStyle(ChatFormatting.LIGHT_PURPLE)
             );
         }
@@ -39,7 +39,7 @@ public class AmethystLanternItem extends Item implements ICurioItem {
         var player = slotContext.entity();
         if (!player.level().isClientSide()) {
             player.sendSystemMessage(
-                Component.literal("The proctection faded. Be careful")
+                Component.literal("✦ Hơi ấm bảo vệ tan biến dần...")
                     .withStyle(ChatFormatting.GRAY)
             );
         }

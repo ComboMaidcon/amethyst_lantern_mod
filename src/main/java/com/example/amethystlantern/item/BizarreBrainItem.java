@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BizarreBrainItem extends Item implements ICurioItem {
 
-    public static final double SAFE_RADIUS = 4.0;
+    public static final double SAFE_RADIUS = 8.0;
     private static final int TICK_INTERVAL = 10;
     private static final double SCAN_RADIUS = SAFE_RADIUS * 3;
 
@@ -40,7 +40,7 @@ public class BizarreBrainItem extends Item implements ICurioItem {
         if (!(slotContext.entity() instanceof Player player)) return;
         if (player.level().isClientSide()) return;
         player.sendSystemMessage(
-            Component.literal("They might think your'e one of them now...")
+            Component.literal("✦ Bộ Não Kỳ Quái bắt đầu bóp méo nhận thức của quái vật...")
                 .withStyle(ChatFormatting.DARK_PURPLE)
         );
         suppressMobAggro(player);
@@ -51,7 +51,7 @@ public class BizarreBrainItem extends Item implements ICurioItem {
         if (!(slotContext.entity() instanceof Player player)) return;
         if (player.level().isClientSide()) return;
         player.sendSystemMessage(
-            Component.literal("Out of protechtion....Watch out")
+            Component.literal("✦ Màn che tâm trí tan biến — hãy cẩn thận!")
                 .withStyle(ChatFormatting.GRAY)
         );
     }
